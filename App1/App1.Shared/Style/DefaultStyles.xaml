@@ -1,0 +1,674 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:clr="clr-namespace:System;assembly=mscorlib"
+    xmlns:toolkit="using:Uno.UI.Toolkit"
+    xmlns:um="using:Uno.Material"
+    xmlns:views="clr-namespace:App1.Views"
+    xmlns:vm="clr-namespace:App1.ViewModels">
+
+    <Color x:Key="CardBackground">#2D2E35</Color>
+    <Color x:Key="CardBorder">#363539</Color>
+    <Style x:Key="ElevatedCardView" TargetType="toolkit:ElevatedView">
+        <Setter Property="Margin" Value="12" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{StaticResource CardBackground}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <!--<Setter Property="Elevation" Value="16" />-->
+    </Style>
+
+    <Style x:Key="BorderCardView" TargetType="Border">
+        <Setter Property="Margin" Value="12" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="{StaticResource CardBackground}" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{StaticResource CardBorder}" />
+    </Style>
+
+    <Thickness x:Key="CardMargin">12 2</Thickness>
+    <Style x:Key="StyleButton" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid
+                    x:Name="MainGrid"
+                    Padding="{TemplateBinding Padding}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <FontIcon
+                        x:Name="MainFontIcon"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        FontSize="40"
+                        Foreground="{TemplateBinding Foreground}"
+                        lyph="&#xE5DC;" />
+
+                        <Viewbox Grid.Row="1" StretchDirection="DownOnly">
+
+                            <TextBlock
+                            x:Name="MainTextBlock"
+                            Text="Testing 123" />
+                        </Viewbox>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+
+                                <VisualState x:Name="Pressed">
+
+                                    <VisualState.Setters>
+                                        <Setter Target="MainGrid.Background" Value="{TemplateBinding PressedColorBackground}" />
+
+                                        <Setter Target="MainFontIcon.Foreground" Value="{TemplateBinding PressedColorForeground}" />
+
+                                        <Setter Target="MainTextBlock.Foreground" Value="{TemplateBinding PressedColorForeground}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="PointerOver">
+
+                                    <VisualState.Setters />
+                                </VisualState>
+                            </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="FocusStates">
+
+                                <VisualState x:Name="Focused" />
+
+                                <VisualState x:Name="PointerFocused" />
+
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="IconButton" TargetType="controls:IconButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="LowerTextFontSize" Value="10" />
+        <Setter Property="PressedColorBackground" Value="White" />
+        <Setter Property="PressedColorForeground" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconButton">
+                    <Grid
+                        x:Name="MainGrid"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <FontIcon
+                            x:Name="MainFontIcon"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{TemplateBinding Foreground}"
+                            Glyph="{TemplateBinding FontGlyph}"
+                            Style="{StaticResource BaseFontIcon}" />
+
+                        <Viewbox Grid.Row="1" StretchDirection="DownOnly">
+
+                            <TextBlock
+                                x:Name="MainTextBlock"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                FontSize="{TemplateBinding LowerTextFontSize}"
+                                Style="{StaticResource BottomButtonText}"
+                                Text="{TemplateBinding LowerText}" />
+                        </Viewbox>
+
+                        <!--<VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <Storyboard>
+                                    <PointerUpThemeAnimation Storyboard.TargetName="MainGrid" />
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="PointerOver">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Background">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundPointerOver}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="BorderBrush">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Foreground">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPointerOver}" />
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <PointerUpThemeAnimation Storyboard.TargetName="MainGrid" />
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Background">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{TemplateBinding PressColorBackground}" />
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <PointerDownThemeAnimation Storyboard.TargetName="MainGrid" />
+
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainFontIcon" Storyboard.TargetProperty="Foreground">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{TemplateBinding PressColorForeground}" />
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <PointerDownThemeAnimation Storyboard.TargetName="MainFontIcon" />
+
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainTextBlock" Storyboard.TargetProperty="Foreground">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{TemplateBinding PressColorForeground}" />
+                                    </ObjectAnimationUsingKeyFrames>
+
+                                    <PointerDownThemeAnimation Storyboard.TargetName="MainTextBlock" />
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Background">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="BorderBrush">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainGrid" Storyboard.TargetProperty="Foreground">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>-->
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+
+                                <VisualState x:Name="Pressed">
+
+                                    <VisualState.Setters>
+                                        <Setter Target="MainGrid.Background" Value="{TemplateBinding PressedColorBackground}" />
+
+                                        <Setter Target="MainFontIcon.Foreground" Value="{TemplateBinding PressedColorForeground}" />
+
+                                        <Setter Target="MainTextBlock.Foreground" Value="{TemplateBinding PressedColorForeground}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="PointerOver">
+
+                                    <VisualState.Setters />
+                                </VisualState>
+                            </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="FocusStates">
+
+                                <VisualState x:Name="Focused" />
+
+                                <VisualState x:Name="PointerFocused" />
+
+                                <VisualState x:Name="Unfocused" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MySlider" TargetType="Slider">
+
+        <Setter Property="Background" Value="{ThemeResource MaterialSliderTrackBrush}" />
+        <Setter Property="Foreground" Value="{ThemeResource PrimaryBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontFamily" Value="{ThemeResource MaterialRegularFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource LabelMediumFontSize}" />
+        <Setter Property="ManipulationMode" Value="None" />
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+        <Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+        <Setter Property="IsFocusEngagementEnabled" Value="True" />
+        <Setter Property="CornerRadius" Value="10" />
+        <!--<not_win:Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />-->
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+
+                    <!--<Grid Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>-->
+
+                    <!--  SliderContainer  -->
+                    <Grid
+                        x:Name="SliderContainer"
+                        Background="Transparent"
+                        Control.IsTemplateFocusTarget="True">
+
+                        <!--  HorizontalTemplate  -->
+                        <Grid
+                            x:Name="HorizontalTemplate"
+                            Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}"
+                            MinHeight="32">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--<Grid.RowDefinitions>
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="15" />
+                                </Grid.RowDefinitions>-->
+
+                            <!--  HorizontalTrackRect  -->
+                            <Rectangle
+                                x:Name="HorizontalTrackRect"
+                                Grid.ColumnSpan="3"
+                                Fill="{TemplateBinding Background}"
+                                RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+                                RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+
+                            <!--  HorizontalDecreaseRect  -->
+                            <Rectangle
+                                x:Name="HorizontalDecreaseRect"
+                                Fill="{TemplateBinding Foreground}"
+                                RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+                                RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+
+                            <!--  HorizontalThumb  -->
+                            <!--<Thumb
+                                        x:Name="HorizontalThumb"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
+                                        Grid.Column="1"
+                                        Width="12"
+                                        Height="12"
+                                        AutomationProperties.AccessibilityView="Raw"
+                                        Background="Pink"
+                                        DataContext="{TemplateBinding Value}"
+                                        FocusVisualMargin="-14,-6,-14,-6"
+                                        Style="{StaticResource MaterialSliderThumbStyle}" />-->
+
+                            <!--<Thumb
+                                        x:Name="HorizontalThumb"
+                                        Grid.Row="0"
+                                        Grid.RowSpan="3"
+                                        Grid.Column="1"
+                                        Width="12"
+                                        Height="12"
+                                        AutomationProperties.AccessibilityView="Raw"
+                                        Background="{TemplateBinding Foreground}"
+                                        DataContext="{TemplateBinding Value}"
+                                        FocusVisualMargin="-14,-6,-14,-6"
+                                        Style="{StaticResource MaterialSliderThumbStyle}" />-->
+                        </Grid>
+
+                        <!--</Grid>-->
+
+                        <!--<VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Pressed" />
+
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalDecreaseRect" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderThumbBackgroundDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="TopTickBar" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BottomTickBar" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftTickBar" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightTickBar" Storyboard.TargetProperty="Fill">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MaterialSliderTickBarFillDisabled}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="PointerOver" />
+                                </VisualStateGroup>
+
+                                <VisualStateGroup x:Name="FocusEngagementStates">
+                                    <VisualState x:Name="FocusDisengaged" />
+
+                                    <VisualState x:Name="FocusEngagedHorizontal">
+
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="HorizontalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+
+                                    <VisualState x:Name="FocusEngagedVertical">
+
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SliderContainer" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="False" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="VerticalThumb" Storyboard.TargetProperty="(Control.IsTemplateFocusTarget)">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="True" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>-->
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MySliderVertical" TargetType="Slider">
+
+        <Setter Property="Background" Value="{ThemeResource MaterialSliderTrackBrush}" />
+        <Setter Property="Foreground" Value="{ThemeResource PrimaryBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontFamily" Value="{ThemeResource MaterialRegularFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource LabelMediumFontSize}" />
+        <Setter Property="ManipulationMode" Value="None" />
+        <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
+        <Setter Property="FocusVisualMargin" Value="-7,0,-7,0" />
+        <Setter Property="IsFocusEngagementEnabled" Value="True" />
+        <Setter Property="CornerRadius" Value="4" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Slider">
+
+                    <!--  SliderContainer  -->
+                    <Grid
+                        x:Name="SliderContainer"
+                        Background="Transparent"
+                        Control.IsTemplateFocusTarget="True">
+
+                        <!--  HorizontalTemplate  -->
+
+                        <!--  VerticalTemplate  -->
+                        <Grid
+                            x:Name="VerticalTemplate"
+                            Width="{Binding Width, RelativeSource={RelativeSource TemplatedParent}}"
+                            MinWidth="32">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <!--  VerticalTrackRect  -->
+                            <Rectangle
+                                x:Name="VerticalTrackRect"
+                                Grid.RowSpan="3"
+                                Fill="{TemplateBinding Background}"
+                                RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+                                RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+
+                            <!--  VerticalDecreaseRect  -->
+                            <Rectangle
+                                x:Name="VerticalDecreaseRect"
+                                Fill="{TemplateBinding Foreground}"
+                                RadiusX="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TopLeftCornerRadiusDoubleValueConverter}}"
+                                RadiusY="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BottomRightCornerRadiusDoubleValueConverter}}" />
+
+                            <!--  LeftTickBar  -->
+                            <!--<TickBar x:Name="LeftTickBar"
+								         Grid.RowSpan="3"
+								         Width="4"
+								         Margin="0,0,4,0"
+								         HorizontalAlignment="Right"
+								         Fill="{StaticResource MaterialSliderTickBarFill}"
+								         Visibility="Collapsed" />-->
+
+                            <!--  VerticalInlineTickBar  -->
+                            <!--<TickBar x:Name="VerticalInlineTickBar"
+								         Grid.RowSpan="3"
+								         Grid.Column="1"
+								         Width="2"
+								         Fill="{StaticResource MaterialSliderInlineTickBarFill}"
+								         Visibility="Collapsed" />-->
+
+                            <!--  RightTickBar  -->
+                            <!--<TickBar x:Name="RightTickBar"
+								         Grid.RowSpan="3"
+								         Grid.Column="2"
+								         Width="4"
+								         Margin="4,0,0,0"
+								         HorizontalAlignment="Left"
+								         Fill="{StaticResource MaterialSliderTickBarFill}"
+								         Visibility="Collapsed" />-->
+
+                            <!--  VerticalThumb  -->
+                            <!--<Thumb x:Name="VerticalThumb"
+								       Grid.Row="1"
+								       Grid.Column="0"
+								       Grid.ColumnSpan="3"
+								       Width="12"
+								       Height="12"
+								       AutomationProperties.AccessibilityView="Raw"
+								       Background="{TemplateBinding Foreground}"
+								       DataContext="{TemplateBinding Value}"
+								       FocusVisualMargin="-6,-14,-6,-14"
+								       Style="{StaticResource MaterialSliderThumbStyle}" />-->
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="MyButton"
+        BasedOn="{StaticResource MaterialBaseButtonStyle}"
+        TargetType="Button">
+        <Setter Property="Foreground" Value="{ThemeResource OnPrimaryBrush}" />
+        <Setter Property="Background" Value="Transparent" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Grid
+                        x:Name="Root"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter
+                                x:Name="IconPresenter"
+                                MinWidth="18"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}}"
+                                Visibility="{Binding Path=(um:ControlExtensions.Icon), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource MaterialNullToCollapsedConverter}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+
+                            <ContentPresenter
+                                x:Name="ContentPresenter"
+                                Grid.Column="1"
+                                Margin="8,0"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                CharacterSpacing="{TemplateBinding CharacterSpacing}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                ContentTransitions="{TemplateBinding ContentTransitions}"
+                                FontFamily="{TemplateBinding FontFamily}"
+                                FontSize="{TemplateBinding FontSize}"
+                                FontWeight="{TemplateBinding FontWeight}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <clr:String x:Key="ChannelFontGlyph">&#xE03B;</clr:String>
+    <clr:String x:Key="HeadsetFontGlyph">&#xE311;</clr:String>
+    <clr:String x:Key="PhoneFontGlyph">&#xE0B0;</clr:String>
+    <clr:String x:Key="PhoneHangupFontGlyph">&#xE0B1;</clr:String>
+    <clr:String x:Key="DialPadFontGlyph">&#xE0BC;</clr:String>
+    <clr:String x:Key="MoveFontGlyph">&#xE0C3;</clr:String>
+    <clr:String x:Key="MoreOptionsFontGlyph">&#xEF64;</clr:String>
+    <clr:String x:Key="RemoveFontGlyph">&#xE15D;</clr:String>
+    <clr:String x:Key="CloseFontGlyph">&#xE5CD;</clr:String>
+    <clr:String x:Key="DoneFontGlyph">&#xe86c;</clr:String>
+    <clr:String x:Key="BackToCircuitGlyph">&#xe14a;</clr:String>
+    <clr:String x:Key="FilterGlyph">&#xe152;</clr:String>
+    <clr:String x:Key="FilterOffGlyph">&#xeb57;</clr:String>
+    <clr:String x:Key="BackArrowGlyph">&#xE5C4;</clr:String>
+    <clr:String x:Key="PhoneChannelFontGlyph">&#xe08e;</clr:String>
+
+    <Style x:Key="BaseFontIcon" TargetType="FontIcon">
+        <Setter Property="FontFamily" Value="{StaticResource MaterialIcons}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style
+        x:Key="ChannelFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource ChannelFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="DialPadFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource DialPadFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="PhoneFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource PhoneFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="PhoneHangupFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource PhoneHangupFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="BackArrowFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource BackArrowGlyph}" />
+        <Setter Property="FontSize" Value="30" />
+    </Style>
+
+    <Style
+        x:Key="MoreOptionsFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource MoreOptionsFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="RemoveFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource RemoveFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="MoveFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource MoveFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="CloseFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource CloseFontGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="FilterFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource FilterGlyph}" />
+    </Style>
+
+    <Style
+        x:Key="FilterOffFontIcon"
+        BasedOn="{StaticResource BaseFontIcon}"
+        TargetType="FontIcon">
+        <Setter Property="Glyph" Value="{StaticResource FilterOffGlyph}" />
+    </Style>
+</ResourceDictionary> 
